@@ -3,4 +3,3 @@ i3 and compton configuration files and bash scripts for my tiling window manager
 
 # Screenshots
 ![](screenshots/rice.png)
-![](screenshots/workflow.png)

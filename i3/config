@@ -54,10 +54,16 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+# bindsym $mod+semicolon focus right 
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -78,7 +84,9 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+# bindsym $mod+h split h
+# changed so that I can use vim bindings instead
+bindsym $mod+g split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -105,10 +113,10 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: main"
-set $ws2 "2: texting"
-set $ws3 "3: coding"
-set $ws4 "4: music"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -145,9 +153,9 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Open specific apps in specific workspaces
-assign [class="Google-chrome"] $ws1
-assign [class="discord"] $ws2
-assign [class="Code"] $ws3
+# assign [class="Google-chrome"] $ws1
+# assign [class="discord"] $ws2
+# assign [class="Code"] $ws3
 
 
 # reload the configuration file
@@ -165,10 +173,17 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        #bindsym j resize shrink width 10 px or 10 ppt
+        #bindsym k resize grow height 10 px or 10 ppt
+        #bindsym l resize shrink height 10 px or 10 ppt
+        #bindsym semicolon resize grow width 10 px or 10 ppt
+
+	bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -202,17 +217,17 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-	colors {
-		background $bg-color
-	    	separator #757575
+#bar {
+#        status_command i3status
+#	colors {
+#		background $bg-color
+#	    	separator #757575
 		#                  border             background         text
-		focused_workspace  $focused-bg-color  $focused-bg-color  $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}	
-}
+#		focused_workspace  $focused-bg-color  $focused-bg-color  $text-color
+#		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+#	}	
+# }
 
 # Lock the screen on mod + shift + x
 bindsym $mod+shift+x exec i3lock
@@ -225,7 +240,7 @@ exec_always feh --bg-scale /home/slipper/Pictures/Wallpaper/nasa_wallpaper.jpg
 # exec_always feh /home/slipper/Pictures/nasa_wallpaper.jpg
 
 # xrandr monitor configuration
-exec --no-startup-id xrandr --output DP-2 --mode 1920x1080 --rate 144
+# exec --no-startup-id xrandr --output DP-2 --mode 1920x1080 --rate 144
 
 # Gaps
 gaps inner 8
@@ -235,7 +250,10 @@ gaps outer 8
 new_window none
 
 # Screenshots
-bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots/'
 
 # Compton
 exec_always compton --config ~/.config/compton.conf
+
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
